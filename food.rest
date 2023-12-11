@@ -1,0 +1,60 @@
+@hostname = localhost
+@port = 3001
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+###
+
+GET http://{{host}}/api/v1/dishes HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/dishes/1 HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/orders HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/orders/1 HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/reservations HTTP/1.1
+
+###
+
+POST http://{{host}}/api/v1/reservations HTTP/1.1
+Content-Type: {{contentType}}
+
+{
+  "name": "John Doe",
+  "email": "johndoe@gmail.com",
+  "phone": "0888888888",
+  "people": 2,
+  "time": "2017-01-01T12:00:00+01:00",
+  "message": "I want to make a reservation"
+}
+
+###
+
+GET http://{{host}}/api/v1/carts HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/carts/add/1 HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/carts/remove/1 HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/carts/1/clear HTTP/1.1
+
+###
+
+GET http://{{host}}/api/v1/carts/1/checkout HTTP/1.1
+
+###

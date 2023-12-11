@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Dish {
+    id          Int         @id @default(autoincrement())
+    name        String
+    description String
+    price       Float
+    image       String
+    OrderItem   OrderItem[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+    id       Int  @id @default(autoincrement())
+    quantity Int
+    dish     Dish @relation(fields: [dishId], references: [id])
+    dishId   Int
+
+    order   Order? @relation(fields: [orderId], references: [id])
+    orderId Int?
+    Cart    Cart?  @relation(fields: [cartId], references: [id])
+    cartId  Int?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Order {
+    id    Int         @id @default(autoincrement())
+    items OrderItem[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Cart {
+    id    Int         @id @default(autoincrement())
+    items OrderItem[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Reservation {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String
+    phone     String
+    people    Int
+    time      DateTime
+    message   String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
